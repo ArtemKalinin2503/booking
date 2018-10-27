@@ -8,7 +8,7 @@ import createStore from './store'; //Подключаем хранилище
 import HomeBooking from './components/HomeBooking';
 import CreateBooking from './components/CreateBooking';
 
-//Вызовим store
+//Создадим store (хранилище)
 const store = createStore;
 
 //Основной компонент 
@@ -20,7 +20,7 @@ class App extends Component {
           <div className="main">
             <div>
               {/*Настраиваем роутинг на компоненты*/}
-              <Route path="/" exact component={HomeBooking}></Route>
+              <Route path="/" exact component={HomeBooking}></Route> {/*exact - значит при загрузке страницы сразу отрисуем данный компонент  */}
               <Route path="/CreateBooking" component={CreateBooking}></Route>
             </div>
           </div>
@@ -30,10 +30,25 @@ class App extends Component {
   }
 };
 
+//Для связи со store
+const mapStateToProps = (state,ownProps={}) => ({
+  id: state.mainReducer.id,
+  price: state.mainReducer.price,
+  bookingDate: state.mainReducer.bookingDate,
+  passangers: state.mainReducer.passangers,
+  trackDate: state.mainReducer.trackDate
+});
+
+//Обвернем данный компонент в connect для свзяи с хранилищем
+const MainApp = connect (
+  mapStateToProps
+)(App);
+
+//Обварачиваем основной компонет в расширение Provider для подключение хранилища 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <MainApp/>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

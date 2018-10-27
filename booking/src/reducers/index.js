@@ -1,71 +1,59 @@
 import { combineReducers } from 'redux';
-//Actions для сетевого запроса данных
-const FETCH_TRANSLATE_REQUEST = 'FETCH_TRANSLATE_REQUEST';
-const FETCH_TRANSLATE_SUCCESS = 'FETCH_TRANSLATE_SUCCESS';
-const FETCH_TRANSLATE_FAILURE = 'FETCH_TRANSLATE_FAILURE';
-//Создаем actions с помощью расширения createAction
-export const inputActionCreator = (inputValue) => {return {type: "INPUT_ACTION", payload: inputValue}}; //Данный action берет value из input
-export const translatedAction = (translate) => {return {type: 'WORD_TRANSLATE_ACTION', payload: translate}}; //Данный action будет получать данные из (data/data-en.json)
-export const fetchTranslateRequestCreator = () => ({type: FETCH_TRANSLATE_REQUEST}); //Данный action создает запрос к БД
-export const fetchSuccessCreator = (data) => ({type: FETCH_TRANSLATE_SUCCESS, payload: data}); //Данный action получает данные из БД
-export const fetchErrorCreator = (err) => ({type: FETCH_TRANSLATE_FAILURE, payload: err}); //Данный action срабатывает если данные не пришли
 
-//Создадим состояния с помощью метода initState (очень важно присваивать сразу необходимый вид данных состоянию исходя какие данные мы ожидаем получить в него)
+//Создаем actions с помощью расширения createAction (каждый action будет получать состояние и изменять его)
+export const actionIdState = (bookingId) => {return {type: "Action_Id_Booking", payload: bookingId}};
+export const actionPrice = (bookingPrice) => {return {type: "Action_Price_Booking", payload: bookingPrice}};
+export const actionBookingDate = (bookingDate) => {return {type: "Action_Date_Booking", payload: bookingDate}};
+export const actionPassangers = (bookingPassangers) => {return {type: "Action_Passangers_Booking", payload: bookingPassangers}};
+export const actionTrackDate = (bookingTrackDate) => {return {type: "Action_TrackDate_Booking", payload: bookingTrackDate}};
+
+//Создадим состояния с помощью метода initState (в каждое состояние передан тип данных которое мы ожидаем записать в каждое состояние)
 export const initState = {
     id: 0,
-    inputValue: 'test',
-    translatedWord: [ //В данное состояние прейдет dataJson.json 
-        {
-            test: [""] 
-        }
-    ],
-    word: [],
-    isFetching: false,
-    isFetched: false,
-    error: null
-  };
-  
-//Создадим reducer в котором опишем что будет обрабатывать action INPUT 
-const reducer = (state = initState, action) => {
+    price: 0,
+    bookingDate: 0,
+    passangers: 0,
+    trackDate: 0    
+};
+
+//Создадим редьюсер в котором опишем, что должен делать каждый action
+const mainReducer = (state = initState, action) => {
+    //С помощью конструкции switch case опишем каждый action
     switch(action.type) {
-        case "INPUT_ACTION": //Созданый action будет изменять состояние inputValue (поэтому пишем action.payload на основание соглашения)
-            return {
-                ...state, 
-                inputValue: action.payload
-            }; 
-        case "WORD_TRANSLATE_ACTION": //Данный action будет получать ответ из (data/data-en.json) и передавать его в состояние translatedWord
+        case "Action_Id_Booking":
             return {
                 ...state,
-                translatedWord: action.payload
-            };
-        case FETCH_TRANSLATE_REQUEST:
+                id: action.payload
+        };
+        case "Action_Price_Booking":
             return {
                 ...state,
-                isFetching: true,
-                isFetched: false
-            };
-        case FETCH_TRANSLATE_SUCCESS:
+                price: action.payload
+        };  
+        case "Action_Date_Booking":
             return {
                 ...state,
-                isFetched: true,
-                isFetching: false,
-                word: action.payload
-            };
-        case FETCH_TRANSLATE_FAILURE:
+                bookingDate: action.payload
+        };
+        case "Action_Passangers_Booking":
             return {
                 ...state,
-                isFetching: false,
-                isFetched: true,
-                error: action.error
-            };
+                passangers: action.payload
+        };  
+        case "Action_TrackDate_Booking":
+            return {
+                ...state,
+                trackDate: action.payload
+        };
         default:
-            return state;                 
+            return state;    
     }
 };
 
-//Передаим созданный reducer в расширение combineReducers
+
+//Передаим созданный редьюсер mainReducer в расширение combineReducers
 const todoApp = combineReducers ({
-    reducer
+    mainReducer
 });
   
 export default todoApp;  
