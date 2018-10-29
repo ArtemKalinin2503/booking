@@ -2,7 +2,6 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; //connect нужен для связи компонента со store
-import store from '../store';
 import {postData } from '../reducers'; //импортируем actions
 import moment from 'moment'; //библиотека для работы с датами
 import {DateRangePicker} from "react-dates"; //Подключаем календарь
