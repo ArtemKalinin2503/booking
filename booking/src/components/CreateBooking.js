@@ -36,7 +36,7 @@ class CreateBooking extends Component {
     //Событие для работы с каледарем (Трекбаром)
     setCalendarEndDate(days){        
         let end = moment(this.state.startDate);
-        end.add(parseInt(days), "days");
+        end.add(parseInt(days, 10), "days");
         this.setState({
             endDate: end,
             days: days
