@@ -1,8 +1,9 @@
 # booking
 Для запуска приложения:
 1) npm install
-2) json-server --watch db.json (старт сервера)
-3) npm start
+2) npm start
+3) json-server --watch db.json (старт сервера)
+
 
 API
 Использовал db.json для https://github.com/typicode/json-server
