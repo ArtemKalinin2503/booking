@@ -28,7 +28,7 @@ class CreateBooking extends Component {
         let data = {
             price: this.state.price,
             passengers: this.state.passengers,
-            "From\Until":this.state.startDate.format("DD-MM-YYYY") +"-"+this.state.endDate.format("DD-MM-YYYY")
+            "From\\Until":this.state.startDate.format("DD-MM-YYYY") +"-"+this.state.endDate.format("DD-MM-YYYY")
         }
         this.props.post(data);
     }
