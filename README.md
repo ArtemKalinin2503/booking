@@ -1,7 +1,7 @@
 # booking
 Для запуска приложения:
 1) npm install (установка зависимостей)
-2) npm start (запукс React)
+2) npm start (запуск React)
 3) json-server --watch db.json (старт сервера)
 
 
