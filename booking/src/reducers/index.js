@@ -122,8 +122,8 @@ export const getData = () => {
 }
 
 //Передаим созданный редьюсер mainReducer в расширение combineReducers
-const todoApp = combineReducers ({
+const reducer = combineReducers ({
     mainReducer
 });
   
-export default todoApp;  
+export default reducer;  
