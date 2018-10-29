@@ -91,7 +91,6 @@ const mainReducer = (state = initState, action) => {
 //Thunk компонент postData для Post запроса 
 export const postData = (post) => {
     return (dispatch) => {
-        debugger;
         dispatch(actionStartPost(true));
         axios.post("http://localhost:3000/posts", post)
         .then(result => {
