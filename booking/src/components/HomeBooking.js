@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'; //Для роутинга
 import { connect } from 'react-redux'; //connect нужен для связи компонента со store
-import store from '../store';
 import {getData} from '../reducers'; //импортируем actions
 
 //Компонент HomeBooking с таблицей бронирования
